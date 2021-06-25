@@ -1,17 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useRecoilValue } from "recoil";
+import { numberOfPlayers, valueOfPlayers } from "../atoms/MyTeam";
 
 const TeamStats = () => {
+  const nofPlayers = useRecoilValue(numberOfPlayers);
+  const value = useRecoilValue(valueOfPlayers);
+
   return (
     <View style={styles.container}>
       <View style={styles.valueContainer}>
         <Text style={styles.label}>Players</Text>
-        <Text style={styles.value}>0 / 15</Text>
+        <Text style={styles.value}>{nofPlayers} / 15</Text>
       </View>
 
       <View style={styles.valueContainer}>
         <Text style={styles.label}>Remaining</Text>
-        <Text style={styles.value}>$100m</Text>
+        <Text style={styles.value}>
+          ${((100_000_000 - value) / 1_000_000).toFixed(1)}m
+        </Text>
       </View>
     </View>
   );
